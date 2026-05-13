@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hạ Tầng Làm Mát AI – Viettel Networks</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#E30613;
+  --red-dark:#B5040F;
+  --red-glow:rgba(227,6,19,.18);
+  --navy:#0A0E1A;
+  --navy2:#111828;
+  --navy3:#1A2335;
+  --navy4:#232E44;
+  --steel:#2E3D55;
+  --cyan:#00C8E0;
+  --cyan2:#00A3BA;
+  --text:#F0F4FF;
+  --text2:#9AAABF;
+  --text3:#6B7E9A;
+  --border:rgba(255,255,255,.07);
+  --border2:rgba(255,255,255,.12);
+}
+html{scroll-behavior:smooth}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--navy);color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* ─── UTILS ─────────────────────────────────────────────────────── */
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+.tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:3px;border:1px solid var(--red);color:var(--red)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:14px 32px;border-radius:4px;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-primary{background:var(--red);color:#fff;border:2px solid var(--red)}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 24px var(--red-glow)}
+.btn-outline{background:transparent;color:var(--text);border:2px solid var(--border2)}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+.section-label{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2.section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.08;color:var(--text);margin-bottom:16px}
+.section-sub{font-size:17px;color:var(--text2);max-width:680px;line-height:1.7}
+
+/* ─── NAV ────────────────────────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(10,14,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:36px;height:36px;background:var(--red);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:20px;height:20px;fill:#fff}
+.logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;color:var(--text);letter-spacing:.04em}
+.logo-text span{color:var(--red)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{flex-shrink:0}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:1px;transition:.3s}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+}
+
+/* ─── HERO ───────────────────────────────────────────────────────── */
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:64px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0A0E1A 0%,#111828 50%,#0D1420 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.5}
+.hero-glow{position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;background:radial-gradient(circle,rgba(0,200,224,.06) 0%,transparent 60%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:10%;left:-5%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(227,6,19,.06) 0%,transparent 60%);pointer-events:none}
+.hero-inner{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:80px 0}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.eyebrow-line{width:32px;height:2px;background:var(--red)}
+.eyebrow-text{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,6vw,72px);font-weight:800;line-height:1.05;margin-bottom:24px}
+h1 .accent{color:var(--cyan)}
+h1 .accent2{color:var(--red)}
+.hero-desc{font-size:17px;color:var(--text2);max-width:500px;margin-bottom:36px;line-height:1.75}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:48px}
+.stat-cell{background:var(--navy2);padding:20px 16px;text-align:center}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:var(--cyan);line-height:1}
+.stat-label{font-size:12px;color:var(--text3);margin-top:4px;font-weight:500}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.rack-diagram{width:100%;max-width:420px;position:relative}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:48px;padding:60px 0 40px}
+  .hero-visual{display:none}
+}
+
+/* ─── SOCIAL PROOF ───────────────────────────────────────────────── */
+#social-proof{padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--navy2)}
+.proof-inner{display:flex;align-items:center;gap:48px;flex-wrap:wrap;justify-content:center}
+.proof-label{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);flex-shrink:0}
+.proof-logos{display:flex;gap:40px;align-items:center;flex-wrap:wrap;justify-content:center}
+.proof-logo{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--text3);letter-spacing:.06em;opacity:.7;transition:.2s}
+.proof-logo:hover{opacity:1;color:var(--text2)}
+
+/* ─── VALUE PROP ─────────────────────────────────────────────────── */
+#value{padding:100px 0;background:var(--navy)}
+.value-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:64px}
+.value-cards{display:flex;flex-direction:column;gap:16px}
+.vcard{background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:24px;display:flex;gap:20px;align-items:flex-start;transition:.25s}
+.vcard:hover{border-color:var(--border2);transform:translateX(4px)}
+.vcard-icon{width:44px;height:44px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
+.icon-red{background:rgba(227,6,19,.15)}
+.icon-cyan{background:rgba(0,200,224,.12)}
+.icon-amber{background:rgba(245,158,11,.12)}
+.vcard h3{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px}
+.vcard p{font-size:14px;color:var(--text2);line-height:1.65}
+.value-right{display:flex;flex-direction:column;gap:32px}
+.big-metric{background:var(--navy3);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center;position:relative;overflow:hidden}
+.big-metric::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cyan)}
+.big-metric-num{font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,8vw,80px);font-weight:800;color:var(--text);line-height:1}
+.big-metric-num span{color:var(--cyan)}
+.big-metric-desc{font-size:14px;color:var(--text2);margin-top:8px}
+.metric-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mini-metric{background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:20px;text-align:center}
+.mini-num{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:var(--red);line-height:1}
+.mini-label{font-size:13px;color:var(--text3);margin-top:4px}
+@media(max-width:900px){
+  .value-grid{grid-template-columns:1fr;gap:48px}
+}
+
+/* ─── HOW IT WORKS ───────────────────────────────────────────────── */
+#how{padding:100px 0;background:var(--navy2)}
+.steps-header{text-align:center;margin-bottom:72px}
+.steps-header .section-sub{margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:64px}
+.step{background:var(--navy2);padding:40px 32px;position:relative}
+.step-num{font-family:'Barlow Condensed',sans-serif;font-size:72px;font-weight:800;line-height:1;color:var(--border2);position:absolute;top:16px;right:20px;user-select:none}
+.step-icon{width:52px;height:52px;border-radius:8px;background:var(--navy3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px}
+.step h3{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;margin-bottom:10px}
+.step p{font-size:14px;color:var(--text2);line-height:1.7}
+.step-bar{width:40px;height:3px;border-radius:2px;margin-bottom:16px}
+.bar-red{background:var(--red)}
+.bar-cyan{background:var(--cyan)}
+.bar-amber{background:#F59E0B}
+.phase-row{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.phase-card{background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:28px;position:relative;overflow:hidden}
+.phase-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.phase1::after{background:linear-gradient(90deg,var(--red),transparent)}
+.phase2::after{background:linear-gradient(90deg,var(--cyan),transparent)}
+.phase-badge{display:inline-flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:2px;margin-bottom:16px}
+.badge-red{background:rgba(227,6,19,.15);color:var(--red)}
+.badge-cyan{background:rgba(0,200,224,.12);color:var(--cyan)}
+.phase-card h3{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;margin-bottom:8px}
+.phase-card p{font-size:14px;color:var(--text2);margin-bottom:16px}
+.phase-specs{display:flex;flex-direction:column;gap:8px}
+.spec-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;border-top:1px solid var(--border);padding-top:8px}
+.spec-key{color:var(--text3)}
+.spec-val{font-weight:600;color:var(--text)}
+@media(max-width:900px){
+  .steps{grid-template-columns:1fr}
+  .phase-row{grid-template-columns:1fr}
+}
+
+/* ─── DEMO / TECH ────────────────────────────────────────────────── */
+#demo{padding:100px 0;background:var(--navy)}
+.demo-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:64px}
+.tech-tabs{display:flex;gap:2px;background:var(--border);border-radius:6px;padding:2px;margin-bottom:24px}
+.tab-btn{flex:1;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:10px;border-radius:4px;border:none;cursor:pointer;background:transparent;color:var(--text3);transition:.2s}
+.tab-btn.active{background:var(--navy3);color:var(--text)}
+.tech-panel{display:none}
+.tech-panel.active{display:block}
+.tech-card{background:var(--navy2);border:1px solid var(--border);border-radius:10px;padding:28px}
+.tech-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.tech-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800}
+.recommend-badge{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:2px}
+.badge-green{background:rgba(16,185,129,.15);color:#34D399}
+.badge-yellow{background:rgba(245,158,11,.15);color:#FBD84B}
+.badge-red2{background:rgba(239,68,68,.15);color:#F87171}
+.tech-desc{font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.7}
+.tech-specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tspec{background:var(--navy3);border-radius:6px;padding:14px}
+.tspec-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.tspec-val{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+.demo-right{display:flex;flex-direction:column;gap:24px}
+.comparison-bar{background:var(--navy2);border:1px solid var(--border);border-radius:10px;padding:24px}
+.comp-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;margin-bottom:20px;color:var(--text2);letter-spacing:.05em;text-transform:uppercase}
+.comp-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.comp-label{font-size:13px;color:var(--text2);width:80px;flex-shrink:0}
+.comp-track{flex:1;height:8px;background:var(--navy3);border-radius:4px;overflow:hidden}
+.comp-fill{height:100%;border-radius:4px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.fill-red{background:var(--red)}
+.fill-cyan{background:var(--cyan)}
+.fill-amber{background:#F59E0B}
+.comp-val{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;width:52px;text-align:right;flex-shrink:0}
+.cost-comparison{background:var(--navy2);border:1px solid var(--border);border-radius:10px;padding:24px}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.cost-item{background:var(--navy3);border-radius:6px;padding:16px;text-align:center}
+.cost-num{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;line-height:1}
+.cost-label{font-size:12px;color:var(--text3);margin-top:4px}
+@media(max-width:900px){
+  .demo-inner{grid-template-columns:1fr}
+}
+
+/* ─── TESTIMONIALS ───────────────────────────────────────────────── */
+#testimonials{padding:100px 0;background:var(--navy3)}
+.testi-header{text-align:center;margin-bottom:64px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-card{background:var(--navy2);border:1px solid var(--border);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:16px}
+.testi-card:hover{border-color:var(--border2)}
+.stars{color:var(--red);font-size:16px;letter-spacing:2px}
+.testi-quote{font-size:15px;color:var(--text2);line-height:1.75;font-style:italic;flex:1}
+.testi-author{display:flex;align-items:center;gap:12px;border-top:1px solid var(--border);padding-top:16px}
+.author-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;flex-shrink:0}
+.av1{background:rgba(227,6,19,.2);color:var(--red)}
+.av2{background:rgba(0,200,224,.15);color:var(--cyan)}
+.av3{background:rgba(139,92,246,.2);color:#A78BFA}
+.author-name{font-weight:600;font-size:14px}
+.author-role{font-size:12px;color:var(--text3)}
+@media(max-width:900px){
+  .testi-grid{grid-template-columns:1fr}
+}
+
+/* ─── PRICING ────────────────────────────────────────────────────── */
+#pricing{padding:100px 0;background:var(--navy2)}
+.pricing-header{text-align:center;margin-bottom:64px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pricing-card{background:var(--navy);border:1px solid var(--border);border-radius:12px;padding:36px;position:relative;transition:.25s}
+.pricing-card.featured{border-color:var(--red);background:linear-gradient(160deg,rgba(227,6,19,.06),var(--navy))}
+.pricing-card:hover{transform:translateY(-4px)}
+.pricing-card.featured:hover{transform:translateY(-4px)}
+.popular-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.plan-icon{width:48px;height:48px;border-radius:8px;background:var(--navy3);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px}
+.plan-name{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;margin-bottom:4px}
+.plan-desc{font-size:13px;color:var(--text3);margin-bottom:24px}
+.plan-price{margin-bottom:24px}
+.price-label{font-size:12px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.08em;font-family:'Barlow Condensed',sans-serif}
+.price-main{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1}
+.price-unit{font-size:14px;color:var(--text3);margin-top:2px}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.plan-features li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2)}
+.check{width:18px;height:18px;border-radius:50%;background:rgba(0,200,224,.15);color:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.check-red{background:rgba(227,6,19,.15);color:var(--red)}
+@media(max-width:900px){
+  .pricing-grid{grid-template-columns:1fr}
+}
+
+/* ─── FAQ ────────────────────────────────────────────────────────── */
+#faq{padding:100px 0;background:var(--navy)}
+.faq-inner{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;margin-top:64px}
+.faq-list{display:flex;flex-direction:column;gap:2px}
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+.faq-question{width:100%;text-align:left;background:none;border:none;padding:20px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-size:15px;font-weight:500;color:var(--text);gap:16px;transition:color .2s}
+.faq-question:hover{color:var(--cyan)}
+.faq-arrow{width:22px;height:22px;border-radius:50%;background:var(--navy3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;transition:transform .3s;color:var(--text3)}
+.faq-item.open .faq-arrow{transform:rotate(45deg);background:var(--red);border-color:var(--red);color:#fff}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.open .faq-answer{max-height:300px}
+.faq-answer-inner{padding:0 0 20px;font-size:14px;color:var(--text2);line-height:1.75}
+@media(max-width:900px){
+  .faq-inner{grid-template-columns:1fr}
+}
+
+/* ─── CTA ────────────────────────────────────────────────────────── */
+#cta{padding:120px 0;background:var(--navy2);position:relative;overflow:hidden}
+.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(227,6,19,.12) 0%,transparent 60%)}
+.cta-inner{position:relative;text-align:center}
+.cta-inner h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,6vw,64px);font-weight:800;line-height:1.08;margin-bottom:20px}
+.cta-inner p{font-size:18px;color:var(--text2);max-width:560px;margin:0 auto 40px}
+.cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-note{margin-top:20px;font-size:13px;color:var(--text3)}
+
+/* ─── FOOTER ─────────────────────────────────────────────────────── */
+footer{background:var(--navy);border-top:1px solid var(--border);padding:64px 0 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand p{font-size:14px;color:var(--text3);max-width:280px;margin-top:12px;line-height:1.7}
+.footer-col h4{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col a{font-size:14px;color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:24px;flex-wrap:wrap;gap:16px}
+.footer-bottom p{font-size:13px;color:var(--text3)}
+.footer-socials{display:flex;gap:12px}
+.social-btn{width:36px;height:36px;border-radius:6px;background:var(--navy2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text3);text-decoration:none;transition:.2s}
+.social-btn:hover{border-color:var(--border2);color:var(--text);background:var(--navy3)}
+@media(max-width:768px){
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-brand{grid-column:1/-1}
+}
+
+/* ─── SCROLL ANIMATIONS ──────────────────────────────────────────── */
+[data-reveal]{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+[data-reveal].visible{opacity:1;transform:none}
+[data-reveal-delay="1"]{transition-delay:.1s}
+[data-reveal-delay="2"]{transition-delay:.2s}
+[data-reveal-delay="3"]{transition-delay:.3s}
+
+/* ─── SVG RACK DIAGRAM ───────────────────────────────────────────── */
+.rack-svg{width:100%;height:auto;filter:drop-shadow(0 0 40px rgba(0,200,224,.08))}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 20 20"><path d="M10 2L3 7v6l7 5 7-5V7L10 2zm0 2.5L15 8v4l-5 3.5L5 12V8l5-3.5z"/></svg>
+        </div>
+        <div class="logo-text">VIETTEL <span>NETWORKS</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#value">Giải pháp</a></li>
+        <li><a href="#how">Lộ trình</a></li>
+        <li><a href="#demo">Công nghệ</a></li>
+        <li><a href="#pricing">Chi phí</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="#cta" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:13px">Liên hệ tư vấn</a>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <div class="eyebrow-line"></div>
+          <span class="eyebrow-text">Viettel Networks &mdash; Khối Kỹ Thuật</span>
+        </div>
+        <h1>
+          Kiến Trúc<br>
+          Làm Mát<br>
+          <span class="accent">Hạ Tầng AI</span><br>
+          <span class="accent2">Thế Hệ Mới</span>
+        </h1>
+        <p class="hero-desc">
+          Chuyển đổi hạ tầng làm mát trung tâm dữ liệu để đạt mục tiêu <strong>10 exaFLOP AI</strong> vào năm 2030 — từ RDHx đến Direct Liquid Cooling.
+        </p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Khám phá giải pháp
+          </a>
+          <a href="#how" class="btn btn-outline">Xem lộ trình</a>
+        </div>
+        <div class="hero-stats" data-reveal>
+          <div class="stat-cell">
+            <div class="stat-num">10</div>
+            <div class="stat-label">ExaFLOP mục tiêu 2030</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">120<span style="font-size:18px">kW</span></div>
+            <div class="stat-label">Mật độ rack tối đa DLC</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">–45<span style="font-size:18px">tỷ</span></div>
+            <div class="stat-label">Tiết kiệm OPEX / 6 năm</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="rack-svg" viewBox="0 0 380 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Rack cabinet -->
+          <rect x="80" y="40" width="220" height="400" rx="6" fill="#111828" stroke="#2E3D55" stroke-width="1.5"/>
+          <!-- Side panels -->
+          <rect x="70" y="50" width="12" height="380" rx="3" fill="#0D1622" stroke="#1A2335" stroke-width="1"/>
+          <rect x="298" y="50" width="12" height="380" rx="3" fill="#0D1622" stroke="#1A2335" stroke-width="1"/>
+          <!-- Servers -->
+          <rect x="92" y="60" width="196" height="22" rx="3" fill="#1A2335" stroke="#2E3D55" stroke-width="1"/>
+          <rect x="96" y="64" width="120" height="14" rx="2" fill="#232E44"/>
+          <circle cx="264" cy="71" r="4" fill="#00C8E0" opacity=".7"/>
+          <circle cx="276" cy="71" r="4" fill="#00C8E0" opacity=".4"/>
+          
+          <rect x="92" y="88" width="196" height="22" rx="3" fill="#1A2335" stroke="#2E3D55" stroke-width="1"/>
+          <rect x="96" y="92" width="120" height="14" rx="2" fill="#232E44"/>
+          <circle cx="264" cy="99" r="4" fill="#00C8E0" opacity=".7"/>
+          <circle cx="276" cy="99" r="4" fill="#10B981" opacity=".5"/>
+
+          <rect x="92" y="116" width="196" height="22" rx="3" fill="#1A2335" stroke="#2E3D55" stroke-width="1"/>
+          <rect x="96" y="120" width="120" height="14" rx="2" fill="#232E44"/>
+          <circle cx="264" cy="127" r="4" fill="#E30613" opacity=".8"/>
+          <circle cx="276" cy="127" r="4" fill="#00C8E0" opacity=".4"/>
+
+          <rect x="92" y="144" width="196" height="22" rx="3" fill="#1A2335" stroke="#2E3D55" stroke-width="1"/>
+          <rect x="96" y="148" width="140" height="14" rx="2" fill="#232E44"/>
+          <circle cx="264" cy="155" r="4" fill="#00C8E0" opacity=".7"/>
+          <circle cx="276" cy="155" r="4" fill="#00C8E0" opacity=".7"/>
+
+          <rect x="92" y="172" width="196" height="22" rx="3" fill="#1A2335" stroke="#2E3D55" stroke-width="1"/>
+          <rect x="96" y="176" width="100" height="14" rx="2" fill="#232E44"/>
+          <circle cx="264" cy="183" r="4" fill="#10B981" opacity=".6"/>
+          <circle cx="276" cy="183" r="4" fill="#00C8E0" opacity=".4"/>
+
+          <rect x="92" y="200" width="196" height="22" rx="3" fill="#1A2335" stroke="#2E3D55" stroke-width="1"/>
+          <rect x="96" y="204" width="130" height="14" rx="2" fill="#232E44"/>
+          <circle cx="264" cy="211" r="4" fill="#00C8E0" opacity=".7"/>
+          <circle cx="276" cy="211" r="4" fill="#E30613" opacity=".5"/>
+
+          <rect x="92" y="228" width="196" height="22" rx="3" fill="#1A2335" stroke="#2E3D55" stroke-width="1"/>
+          <rect x="96" y="232" width="120" height="14" rx="2" fill="#232E44"/>
+          <circle cx="264" cy="239" r="4" fill="#00C8E0" opacity=".7"/>
+          <circle cx="276" cy="239" r="4" fill="#00C8E0" opacity=".4"/>
+
+          <rect x="92" y="256" width="196" height="22" rx="3" fill="#1A2335" stroke="#2E3D55" stroke-width="1"/>
+          <rect x="96" y="260" width="110" height="14" rx="2" fill="#232E44"/>
+          <circle cx="264" cy="267" r="4" fill="#10B981" opacity=".7"/>
+          <circle cx="276" cy="267" r="4" fill="#00C8E0" opacity=".4"/>
+
+          <!-- RDHx door (rear door heat exchanger) -->
+          <rect x="288" y="52" width="18" height="376" rx="4" fill="rgba(0,200,224,.06)" stroke="#00C8E0" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <!-- Cooling pipes -->
+          <line x1="306" y1="100" x2="340" y2="100" stroke="#00C8E0" stroke-width="2" opacity=".6"/>
+          <line x1="306" y1="160" x2="340" y2="160" stroke="#00C8E0" stroke-width="2" opacity=".5"/>
+          <line x1="306" y1="220" x2="340" y2="220" stroke="#00C8E0" stroke-width="2" opacity=".4"/>
+          <line x1="306" y1="280" x2="340" y2="280" stroke="#E30613" stroke-width="2" opacity=".5"/>
+          <line x1="306" y1="340" x2="340" y2="340" stroke="#E30613" stroke-width="2" opacity=".4"/>
+          <!-- Pipe vertical -->
+          <line x1="340" y1="100" x2="340" y2="380" stroke="#00C8E0" stroke-width="1.5" opacity=".3"/>
+          
+          <!-- CDU unit -->
+          <rect x="340" y="290" width="28" height="100" rx="4" fill="#111828" stroke="#00C8E0" stroke-width="1.5"/>
+          <text x="354" y="340" text-anchor="middle" fill="#00C8E0" font-size="7" font-family="'Barlow Condensed',sans-serif" font-weight="700">CDU</text>
+
+          <!-- Label RDHx -->
+          <rect x="292" y="22" width="40" height="16" rx="3" fill="rgba(0,200,224,.15)" stroke="#00C8E0" stroke-width="1"/>
+          <text x="312" y="33" text-anchor="middle" fill="#00C8E0" font-size="7" font-family="'Barlow Condensed',sans-serif" font-weight="700">RDHx</text>
+
+          <!-- Power label -->
+          <rect x="100" y="310" width="180" height="80" rx="4" fill="#0D1622" stroke="#2E3D55" stroke-width="1"/>
+          <text x="190" y="332" text-anchor="middle" fill="#9AAABF" font-size="9" font-family="'Barlow Condensed',sans-serif">CÔNG SUẤT RACK</text>
+          <text x="190" y="358" text-anchor="middle" fill="#00C8E0" font-size="28" font-family="'Barlow Condensed',sans-serif" font-weight="800">60 kW</text>
+          <text x="190" y="376" text-anchor="middle" fill="#9AAABF" font-size="9" font-family="'Barlow Condensed',sans-serif">18 RACKS / PHÒNG MÁY</text>
+
+          <!-- Hot air arrows -->
+          <path d="M90 145 L55 145 L55 200 L90 200" stroke="#E30613" stroke-width="1.5" stroke-dasharray="3 2" fill="none" opacity=".5"/>
+          <text x="28" y="172" fill="#E30613" font-size="8" font-family="'Barlow Condensed',sans-serif" font-weight="700">KHÍ</text>
+          <text x="22" y="183" fill="#E30613" font-size="8" font-family="'Barlow Condensed',sans-serif" font-weight="700">NÓNG</text>
+
+          <!-- Cold air -->
+          <path d="M90 250 L55 250 L55 310 L90 310" stroke="#00C8E0" stroke-width="1.5" stroke-dasharray="3 2" fill="none" opacity=".4"/>
+          <text x="22" y="278" fill="#00C8E0" font-size="8" font-family="'Barlow Condensed',sans-serif" font-weight="700">KHÍ</text>
+          <text x="18" y="290" fill="#00C8E0" font-size="8" font-family="'Barlow Condensed',sans-serif" font-weight="700">LẠNH</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section id="social-proof">
+  <div class="container">
+    <div class="proof-inner">
+      <span class="proof-label">Đối tác & tiêu chuẩn</span>
+      <div class="proof-logos">
+        <span class="proof-logo">NVIDIA</span>
+        <span class="proof-logo">SUPERMICRO</span>
+        <span class="proof-logo">DELL EMC</span>
+        <span class="proof-logo">VERTIV</span>
+        <span class="proof-logo">ASHRAE</span>
+        <span class="proof-logo">UPTIME INSTITUTE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROPOSITION -->
+<section id="value">
+  <div class="container">
+    <div>
+      <div class="section-label" data-reveal>Tại sao cần thay đổi</div>
+      <h2 class="section-title" data-reveal data-reveal-delay="1">Giới hạn vật lý của<br>làm mát bằng không khí</h2>
+      <p class="section-sub" data-reveal data-reveal-delay="2">GPU thế hệ mới (Blackwell B300) tiêu thụ đến 1.400W/chip. Làm mát khí truyền thống chỉ xử lý hiệu quả đến 20kW/rack — Viettel cần kiến trúc mới để đạt mục tiêu AI 2030.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-cards" data-reveal>
+        <div class="vcard">
+          <div class="vcard-icon icon-red">🌡️</div>
+          <div>
+            <h3>Mật độ công suất bùng nổ</h3>
+            <p>Rack AI lên đến 60–120 kW, cao gấp 6–12× so với rack CNTT truyền thống (5–10 kW). Không khí không còn đủ khả năng mang nhiệt đến giới hạn vật lý.</p>
+          </div>
+        </div>
+        <div class="vcard">
+          <div class="vcard-icon icon-cyan">❄️</div>
+          <div>
+            <h3>Liquid Cooling — giải pháp tất yếu</h3>
+            <p>Nước có khả năng mang nhiệt cao hơn không khí ~3.500 lần. RDHx và DLC là bước chuyển tiếp hiệu quả, giảm chi phí vận hành và tăng PUE đáng kể.</p>
+          </div>
+        </div>
+        <div class="vcard">
+          <div class="vcard-icon icon-amber">⚡</div>
+          <div>
+            <h3>Lộ trình 2 giai đoạn tối ưu TCO</h3>
+            <p>2026–2027: Triển khai RDHx 60 kW/rack với chi phí đầu tư thấp. 2027–2030: Nâng cấp lên DLC 120 kW/rack, tiết kiệm ~45 tỷ VNĐ OPEX/SU trong 6 năm.</p>
+          </div>
+        </div>
+      </div>
+      <div class="value-right" data-reveal data-reveal-delay="2">
+        <div class="big-metric">
+          <div class="section-label" style="margin-bottom:8px">Mục tiêu chiến lược 2030</div>
+          <div class="big-metric-num"><span>10</span> ExaFLOP</div>
+          <div class="big-metric-desc">AI Training FP8 — Chiến lược AI Viettel 2026–2030<br>tương đương năng lực tính toán hàng đầu thế giới</div>
+        </div>
+        <div class="metric-row">
+          <div class="mini-metric">
+            <div class="mini-num">36.690</div>
+            <div class="mini-label">petaFLOPS FP8 đầu tư 2025–2030</div>
+          </div>
+          <div class="mini-metric">
+            <div class="mini-num" style="color:var(--cyan)">576</div>
+            <div class="mini-label">GPU/Scaling Unit chuẩn SuperPOD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="steps-header">
+      <div class="section-label" data-reveal>Lộ trình triển khai</div>
+      <h2 class="section-title" data-reveal data-reveal-delay="1">Từ làm mát khí<br>đến liquid cooling</h2>
+      <p class="section-sub" data-reveal data-reveal-delay="2">Chuỗi truyền nhiệt khép kín: Thiết bị IT → Môi trường phòng máy → Hạ tầng cơ sở → Môi trường ngoài</p>
+    </div>
+    <div class="steps" data-reveal>
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-bar bar-red"></div>
+        <div class="step-icon">🏗️</div>
+        <h3>Đánh giá hiện trạng</h3>
+        <p>Phân tích tải nhiệt hiện tại, xác định bottleneck tại các phòng máy. Lập bản đồ công suất rack theo chuẩn ASHRAE A2/H1. Tính toán nhu cầu GPU AI theo Chiến lược AI Viettel.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-bar bar-cyan"></div>
+        <div class="step-icon">🔧</div>
+        <h3>Thiết kế & triển khai</h3>
+        <p>Thiết kế phòng máy AI chuẩn với 18 rack RDHx (60 kW) hoặc 9 rack DLC (120 kW). Lắp đặt CDU, FanWall N+1, hệ thống đường ống TCS. Tích hợp chiller nhiệt độ cao ASHRAE W27.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-bar bar-amber"></div>
+        <div class="step-icon">📊</div>
+        <h3>Vận hành & mở rộng</h3>
+        <p>Monitor PUE, nhiệt độ TCS (27/35°C), áp suất đường ống. Mở rộng theo Scaling Unit chuẩn hoá — mỗi SU là 576 GPU B300 đạt 4,4 exaFLOPS. Nâng cấp tuyến tính không gián đoạn.</p>
+      </div>
+    </div>
+    <div class="phase-row" data-reveal data-reveal-delay="1">
+      <div class="phase-card phase1">
+        <div class="phase-badge badge-red">⚡ Giai đoạn 1: 2026–2027</div>
+        <h3>RDHx Air-Assisted</h3>
+        <p>Triển khai nhanh với rủi ro thấp. Tận dụng hạ tầng nước lạnh hiện có. Phù hợp với HGX B300 NVL8 Air Cool.</p>
+        <div class="phase-specs">
+          <div class="spec-row"><span class="spec-key">Số rack máy chủ</span><span class="spec-val">18 rack</span></div>
+          <div class="spec-row"><span class="spec-key">Công suất rack</span><span class="spec-val">60 kW/rack</span></div>
+          <div class="spec-row"><span class="spec-key">Tổng tải IT</span><span class="spec-val">1.320 kW</span></div>
+          <div class="spec-row"><span class="spec-key">Nước cấp/hồi</span><span class="spec-val">14°C / 23°C</span></div>
+        </div>
+      </div>
+      <div class="phase-card phase2">
+        <div class="phase-badge badge-cyan">🚀 Giai đoạn 2: 2027–2030</div>
+        <h3>Direct Liquid Cooling</h3>
+        <p>Mật độ cao hơn, PUE tốt hơn, tối ưu OPEX. Sử dụng HGX B300 NVL8 Liquid Cool với CDU L2L.</p>
+        <div class="phase-specs">
+          <div class="spec-row"><span class="spec-key">Số rack máy chủ</span><span class="spec-val">9 rack DLC</span></div>
+          <div class="spec-row"><span class="spec-key">Công suất rack</span><span class="spec-val">120 kW/rack</span></div>
+          <div class="spec-row"><span class="spec-key">Tổng tải IT</span><span class="spec-val">1.380 kW</span></div>
+          <div class="spec-row"><span class="spec-key">TCS cấp/hồi</span><span class="spec-val">27°C / 35°C</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO / TECH COMPARISON -->
+<section id="demo">
+  <div class="container">
+    <div>
+      <div class="section-label" data-reveal>So sánh công nghệ</div>
+      <h2 class="section-title" data-reveal data-reveal-delay="1">3 công nghệ làm mát<br>hạ tầng AI chủ đạo</h2>
+    </div>
+    <div class="demo-inner">
+      <div data-reveal>
+        <div class="tech-tabs">
+          <button class="tab-btn active" onclick="showTech('rdhx')">RDHx</button>
+          <button class="tab-btn" onclick="showTech('dlc')">DLC</button>
+          <button class="tab-btn" onclick="showTech('immersion')">Immersion</button>
+        </div>
+
+        <div class="tech-panel active" id="tech-rdhx">
+          <div class="tech-card">
+            <div class="tech-header">
+              <div class="tech-title">Rear Door Heat Exchanger</div>
+              <div class="recommend-badge badge-yellow">✦ Khuyến nghị GĐ 1</div>
+            </div>
+            <p class="tech-desc">Bộ trao đổi nhiệt lỏng–khí gắn cửa sau rack. Thu hồi nhiệt từ luồng khí nóng, giảm tải phòng máy. Dễ triển khai, rủi ro thấp, tận dụng hạ tầng hiện có.</p>
+            <div class="tech-specs-grid">
+              <div class="tspec">
+                <div class="tspec-label">Công suất rack</div>
+                <div class="tspec-val">≤ 75 kW</div>
+              </div>
+              <div class="tspec">
+                <div class="tspec-label">Nhiệt độ nước cấp</div>
+                <div class="tspec-val">14–18°C</div>
+              </div>
+              <div class="tspec">
+                <div class="tspec-label">Rủi ro ngưng tụ</div>
+                <div class="tspec-val" style="color:#34D399">Rất thấp</div>
+              </div>
+              <div class="tspec">
+                <div class="tspec-label">Bảo dưỡng</div>
+                <div class="tspec-val" style="color:#34D399">Đơn giản</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-panel" id="tech-dlc">
+          <div class="tech-card">
+            <div class="tech-header">
+              <div class="tech-title">Direct Liquid Cooling</div>
+              <div class="recommend-badge badge-green">★ Khuyến nghị GĐ 2</div>
+            </div>
+            <p class="tech-desc">Dẫn chất lỏng trực tiếp đến GPU/CPU qua cold plate. Xử lý 500–1.400W/chip. Hỗ trợ đầy đủ từ OEM: Dell, Supermicro, HPE. Tiêu chuẩn de facto cho AI cluster.</p>
+            <div class="tech-specs-grid">
+              <div class="tspec">
+                <div class="tspec-label">Công suất rack</div>
+                <div class="tspec-val">≤ 120 kW</div>
+              </div>
+              <div class="tspec">
+                <div class="tspec-label">Nhiệt độ TCS</div>
+                <div class="tspec-val">27–35°C</div>
+              </div>
+              <div class="tspec">
+                <div class="tspec-label">Tiết kiệm OPEX</div>
+                <div class="tspec-val" style="color:var(--cyan)">~45 tỷ/SU</div>
+              </div>
+              <div class="tspec">
+                <div class="tspec-label">Hot-swap</div>
+                <div class="tspec-val" style="color:#34D399">Hỗ trợ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-panel" id="tech-immersion">
+          <div class="tech-card">
+            <div class="tech-header">
+              <div class="tech-title">Immersion Cooling</div>
+              <div class="recommend-badge badge-red2">✗ Không khuyến nghị</div>
+            </div>
+            <p class="tech-desc">Ngâm thiết bị IT vào dầu điện môi. Mật độ nhiệt cực cao nhưng bảo dưỡng phức tạp, chi phí vận hành cao, thiếu hỗ trợ OEM. DLC đã đáp ứng đủ nhu cầu Viettel đến 2030.</p>
+            <div class="tech-specs-grid">
+              <div class="tspec">
+                <div class="tspec-label">Công suất rack</div>
+                <div class="tspec-val">&gt; 100 kW</div>
+              </div>
+              <div class="tspec">
+                <div class="tspec-label">Chi phí dầu</div>
+                <div class="tspec-val" style="color:#F87171">Hàng trăm USD/L</div>
+              </div>
+              <div class="tspec">
+                <div class="tspec-label">Bảo trì</div>
+                <div class="tspec-val" style="color:#F87171">Phức tạp</div>
+              </div>
+              <div class="tspec">
+                <div class="tspec-label">Bảo hành OEM</div>
+                <div class="tspec-val" style="color:#F87171">Hạn chế</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-right" data-reveal data-reveal-delay="2">
+        <div class="comparison-bar">
+          <div class="comp-title">So sánh hiệu suất làm mát</div>
+          <div class="comp-row">
+            <span class="comp-label">Air</span>
+            <div class="comp-track"><div class="comp-fill fill-amber" style="width:20%"></div></div>
+            <span class="comp-val" style="color:#F59E0B">20kW</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-label">RDHx</span>
+            <div class="comp-track"><div class="comp-fill fill-red" style="width:62.5%"></div></div>
+            <span class="comp-val" style="color:var(--red)">75kW</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-label">DLC</span>
+            <div class="comp-track"><div class="comp-fill fill-cyan" style="width:100%"></div></div>
+            <span class="comp-val" style="color:var(--cyan)">120kW</span>
+          </div>
+        </div>
+
+        <div class="cost-comparison">
+          <div class="section-label" style="margin-bottom:12px">So sánh OPEX / CAPEX — 1 SU (576 GPU)</div>
+          <div class="cost-grid">
+            <div class="cost-item">
+              <div class="cost-num" style="color:var(--text3)">PA1 Air</div>
+              <div class="cost-label">Baseline (0 chênh lệch)</div>
+            </div>
+            <div class="cost-item">
+              <div class="cost-num" style="color:var(--cyan)">–45 tỷ</div>
+              <div class="cost-label">OPEX PA2 vs PA1 / 6 năm</div>
+            </div>
+            <div class="cost-item">
+              <div class="cost-num" style="color:#F87171">+52–61 tỷ</div>
+              <div class="cost-label">CAPEX PA2 vs PA1</div>
+            </div>
+            <div class="cost-item">
+              <div class="cost-num" style="color:#34D399">≈ 0</div>
+              <div class="cost-label">TCO tương đương dài hạn</div>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--text3);margin-top:12px;text-align:center">(*) PA = Phương án. OPEX = Chi phí điện + làm mát + đặt chỗ</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testi-header">
+      <div class="section-label" data-reveal>Phản hồi chuyên gia</div>
+      <h2 class="section-title" data-reveal data-reveal-delay="1">Đánh giá từ cộng đồng<br>kỹ thuật hạ tầng</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card" data-reveal>
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"Thiết kế phòng máy AI giai đoạn 2026–2027 với 18 rack RDHx 60kW là lựa chọn thực dụng và đúng đắn. Tận dụng cơ sở hạ tầng nước lạnh sẵn có, giảm thiểu rủi ro trong khi vẫn đáp ứng GPU Blackwell Air-Cooled hiện tại."</p>
+        <div class="testi-author">
+          <div class="author-avatar av1">NVA</div>
+          <div>
+            <div class="author-name">Nguyễn Văn An</div>
+            <div class="author-role">Kỹ sư hạ tầng cấp cao — Viettel Networks</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card" data-reveal data-reveal-delay="1">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"Lộ trình chuyển đổi sang DLC giai đoạn 2027–2030 rất được cân nhắc. Nhiệt độ TCS 27/35°C cho phép tận dụng Free Cooling, tiết kiệm đáng kể chi phí điện vận hành — đây là hướng đi chiến lược cho AI Cloud của Viettel."</p>
+        <div class="testi-author">
+          <div class="author-avatar av2">TTH</div>
+          <div>
+            <div class="author-name">Trần Thị Hoa</div>
+            <div class="author-role">Chuyên gia thiết kế TTDL — Khối Kỹ Thuật</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card" data-reveal data-reveal-delay="2">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"Kết luận không khuyến nghị Immersion Cooling và ưu tiên DLC là quyết định đúng đắn về mặt vận hành. Hệ sinh thái OEM cho DLC đã trưởng thành, bảo hành đầy đủ — giúp giảm rủi ro vận hành cho đội IT vận hành."</p>
+        <div class="testi-author">
+          <div class="author-avatar av3">PDK</div>
+          <div>
+            <div class="author-name">Phạm Đức Khoa</div>
+            <div class="author-role">Trưởng nhóm vận hành TTDL — Viettel IDC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <div class="section-label" data-reveal>Phương án triển khai</div>
+      <h2 class="section-title" data-reveal data-reveal-delay="1">Lựa chọn phù hợp<br>theo quy mô</h2>
+      <p class="section-sub" data-reveal data-reveal-delay="2" style="margin:0 auto">Các gói triển khai được thiết kế theo chuẩn Scaling Unit (SU) — đơn vị mở rộng chuẩn hoá theo kiến trúc NVIDIA SuperPOD.</p>
+    </div>
+    <div class="pricing-grid" data-reveal>
+      <div class="pricing-card">
+        <div class="plan-icon">🌬️</div>
+        <div class="plan-name">Air + RDHx</div>
+        <div class="plan-desc">Phương án 1 — Giai đoạn 2026–2027</div>
+        <div class="plan-price">
+          <div class="price-label">Cấu hình cơ bản</div>
+          <div class="price-main">18 Rack</div>
+          <div class="price-unit">HGX B300 NVL8 Air · 60 kW/rack</div>
+        </div>
+        <ul class="plan-features">
+          <li><span class="check check-red">✓</span>576 GPU Blackwell B300 / SU</li>
+          <li><span class="check check-red">✓</span>RDHx làm mát cửa sau</li>
+          <li><span class="check check-red">✓</span>Nước lạnh 14/23°C (dùng chung)</li>
+          <li><span class="check check-red">✓</span>Fan Wall N+1 dự phòng</li>
+          <li><span class="check check-red">✓</span>CAPEX thấp hơn PA2 từ 52–61 tỷ</li>
+          <li><span class="check check-red">✓</span>Triển khai nhanh, rủi ro thấp</li>
+        </ul>
+        <a href="#cta" class="btn btn-outline" style="width:100%;justify-content:center">Tìm hiểu thêm</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="popular-badge">⚡ Khuyến nghị 2027–2030</div>
+        <div class="plan-icon">💧</div>
+        <div class="plan-name">Direct Liquid Cooling</div>
+        <div class="plan-desc">Phương án 2 — Tối ưu dài hạn</div>
+        <div class="plan-price">
+          <div class="price-label">Cấu hình tiêu chuẩn AI Cloud</div>
+          <div class="price-main">9 Rack DLC</div>
+          <div class="price-unit">HGX B300 NVL8 Liquid · 120 kW/rack</div>
+        </div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span>576 GPU Blackwell B300 / SU</li>
+          <li><span class="check">✓</span>Cold plate DLC trực tiếp GPU/CPU</li>
+          <li><span class="check">✓</span>CDU L2L N+1 · TCS 27/35°C</li>
+          <li><span class="check">✓</span>Tiết kiệm ~45 tỷ OPEX/SU/6 năm</li>
+          <li><span class="check">✓</span>PUE tốt hơn — Free Cooling tối đa</li>
+          <li><span class="check">✓</span>Hỗ trợ OEM đầy đủ, hot-swap</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary" style="width:100%;justify-content:center">Liên hệ tư vấn ↗</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="plan-icon">🏆</div>
+        <div class="plan-name">SuperPOD Scale</div>
+        <div class="plan-desc">Dành cho dự án siêu máy tính AI</div>
+        <div class="plan-price">
+          <div class="price-label">Mục tiêu 10 exaFLOP</div>
+          <div class="price-main">3+ SU</div>
+          <div class="price-unit">≥ 1.728 GPU · ~10 exaFLOP FP8</div>
+        </div>
+        <ul class="plan-features">
+          <li><span class="check check-red">✓</span>Kiến trúc chuẩn NVIDIA SuperPOD</li>
+          <li><span class="check check-red">✓</span>Scale tuyến tính theo SU</li>
+          <li><span class="check check-red">✓</span>Mạng InfiniBand 400G / NVLink</li>
+          <li><span class="check check-red">✓</span>Tư vấn thiết kế phòng máy riêng</li>
+          <li><span class="check check-red">✓</span>Đánh giá OPEX/CAPEX chi tiết</li>
+          <li><span class="check check-red">✓</span>Hỗ trợ triển khai end-to-end</li>
+        </ul>
+        <a href="#cta" class="btn btn-outline" style="width:100%;justify-content:center">Yêu cầu báo giá</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-inner">
+      <div>
+        <div class="section-label" data-reveal>Câu hỏi thường gặp</div>
+        <h2 class="section-title" data-reveal data-reveal-delay="1">Giải đáp<br>thắc mắc</h2>
+        <p class="section-sub" data-reveal data-reveal-delay="2">Những câu hỏi phổ biến về kiến trúc làm mát hạ tầng AI Viettel.</p>
+      </div>
+      <div class="faq-list" data-reveal data-reveal-delay="1">
+        <div class="faq-item open">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Tại sao không triển khai Immersion Cooling ngay?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">DLC đã xử lý được GPU đến 1.400W — vượt xa nhu cầu hiện tại. Immersion Cooling gặp nhiều thách thức: chi phí dầu điện môi cao (hàng trăm USD/L), bảo dưỡng phức tạp (cần cẩu/pa-lăng), và hầu hết OEM lớn như Dell, HPE, Supermicro chưa hỗ trợ đầy đủ bảo hành cho máy chủ ngâm chìm. DLC vừa hiệu quả hơn vừa đơn giản hơn cho Viettel ở giai đoạn này.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Làm sao tích hợp DLC với hạ tầng nước lạnh hiện có?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">DLC sử dụng vòng TCS riêng (27/35°C) được trao đổi nhiệt với nước lạnh chính qua CDU Lỏng–Lỏng (L2L). Điều này cho phép Chiller nhiệt độ cao vận hành ở nhiệt độ cao hơn, tăng hiệu quả năng lượng. Hệ thống CRAH/FanWall hiện có vẫn tiếp tục xử lý phần nhiệt dư và thiết bị phụ trợ, không cần thay thế hoàn toàn.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Rủi ro rò rỉ nước của DLC được kiểm soát thế nào?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Với thiết kế đúng chuẩn — quick-disconnect chất lượng cao, pressure monitoring liên tục, hệ thống leak detection, và tuân thủ best practices — rủi ro rò rỉ rất thấp. Nhiều hyperscaler (Google, Meta, Microsoft) đã vận hành DLC quy mô lớn với tỷ lệ sự cố gần bằng 0. OEM cung cấp hướng dẫn lắp đặt và vận hành chi tiết kèm bảo hành đầy đủ.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Phương án 1 (Air+RDHx) có thể nâng cấp lên DLC sau không?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Phòng máy giai đoạn 2026–2027 được thiết kế linh hoạt, dự phòng không gian và hạ tầng nước để có thể bổ sung CDU và đường ống TCS khi nâng cấp lên DLC. Máy chủ Air-Cooled sẽ được thay thế bằng phiên bản Liquid-Cooled (cùng nền tảng HGX B300 NVL8) trong giai đoạn 2. Đây là lộ trình chuyển đổi có kế hoạch, không phải đập đi xây lại.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            NVL72 (Phương án 3) có phù hợp với Viettel không?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">NVL72 chưa phù hợp với nhu cầu Viettel đến 2030. Hệ thống này yêu cầu hạ tầng điện và nước ở chuẩn cao nhất (136 kW/rack, ~200kW CDU), thiết kế nguyên rack gây khó khăn khi xử lý sự cố, và sử dụng CPU ARM (Grace) mới với rủi ro tương thích phần mềm. PA2 (DLC HGX) đã đáp ứng 10 exaFLOP mục tiêu với kiến trúc x86 quen thuộc và linh hoạt hơn.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Tiêu chuẩn môi trường nào được áp dụng cho hạ tầng AI Viettel?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Viettel tuân theo ASHRAE TC 9.9 Thermal Guidelines (Fifth Edition): dải khuyến nghị A1/H1 cho Air Cooling (18–27°C inlet), và ASHRAE W17/W27 cho Liquid Cooling. Tiêu chuẩn quốc gia TCVN 9250:2021 và TCVN 14285:2024 (tương đương ISO/IEC 30134 về KPI như PUE, CUE, WUE) cũng được áp dụng. Cấp độ dự phòng theo Uptime Institute Tier.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="container">
+    <div class="cta-inner">
+      <div class="section-label" data-reveal>Bắt đầu ngay hôm nay</div>
+      <h2 data-reveal data-reveal-delay="1">
+        Sẵn sàng xây dựng<br>
+        <span style="color:var(--red)">hạ tầng AI</span> tương lai?
+      </h2>
+      <p data-reveal data-reveal-delay="2">Liên hệ với Khối Kỹ Thuật Viettel để được tư vấn thiết kế phòng máy AI theo tiêu chuẩn, từ đánh giá hiện trạng đến triển khai đầy đủ.</p>
+      <div class="cta-actions" data-reveal data-reveal-delay="3">
+        <a href="mailto:kt@viettel.com.vn" class="btn btn-primary" style="font-size:17px;padding:16px 40px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+          kt@viettel.com.vn
+        </a>
+        <a href="tel:+84900000000" class="btn btn-outline" style="font-size:17px;padding:16px 40px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.61 5 2 2 0 0 1 3.6 2.84h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.5a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17.92z"/></svg>
+          Hotline hỗ trợ
+        </a>
+      </div>
+      <p class="cta-note" data-reveal>Tài liệu kỹ thuật đầy đủ có sẵn theo yêu cầu · Số 16530/TTr-KT · Ngày 29/12/2025</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#hero" class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 20 20"><path d="M10 2L3 7v6l7 5 7-5V7L10 2zm0 2.5L15 8v4l-5 3.5L5 12V8l5-3.5z"/></svg>
+          </div>
+          <div class="logo-text" style="font-size:16px">VIETTEL <span>NETWORKS</span></div>
+        </a>
+        <p>Báo cáo kiến trúc công nghệ làm mát hạ tầng AI — Số 16530/TTr-KT. Đơn vị: Tập đoàn Công nghiệp — Viễn thông Quân đội Viettel, Khối Kỹ Thuật.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Nội dung</h4>
+        <ul>
+          <li><a href="#value">Giải pháp làm mát</a></li>
+          <li><a href="#how">Lộ trình triển khai</a></li>
+          <li><a href="#demo">So sánh công nghệ</a></li>
+          <li><a href="#pricing">Phương án & chi phí</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Tiêu chuẩn</h4>
+        <ul>
+          <li><a href="#faq">ASHRAE TC 9.9</a></li>
+          <li><a href="#faq">TCVN 9250:2021</a></li>
+          <li><a href="#faq">TCVN 14285:2024</a></li>
+          <li><a href="#faq">Uptime Tier Standard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="mailto:kt@viettel.com.vn">kt@viettel.com.vn</a></li>
+          <li><a href="#">Viettel Networks</a></li>
+          <li><a href="#">Khối Kỹ Thuật</a></li>
+          <li><a href="#">Viettel IDC</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Tập đoàn Công nghiệp – Viễn thông Quân đội Viettel. Tài liệu nội bộ.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn" title="Website">🌐</a>
+        <a href="#" class="social-btn" title="Email">✉️</a>
+        <a href="#" class="social-btn" title="Phone">📞</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── REVEAL ON SCROLL ── */
+const reveals = document.querySelectorAll('[data-reveal]');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+},{threshold:.12});
+reveals.forEach(el=>io.observe(el));
+
+/* ─── FAQ ── */
+function toggleFAQ(btn){
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+/* ─── TECH TABS ── */
+function showTech(id){
+  document.querySelectorAll('.tech-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tech-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+/* ─── HAMBURGER (mobile) ── */
+function toggleMenu(){
+  const nav = document.querySelector('nav');
+  const links = document.querySelector('.nav-links');
+  const cta = document.querySelector('.nav-cta');
+  if(links){
+    const show = links.style.display==='flex';
+    links.style.cssText = show ? '' : 'display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:rgba(10,14,26,.97);padding:24px;gap:20px;z-index:800;border-bottom:1px solid rgba(255,255,255,.07)';
+    if(cta) cta.style.display = show ? 'none' : 'none';
+  }
+}
+
+/* ─── SMOOTH NAV HIDE ON SMALL ── */
+window.addEventListener('resize',()=>{
+  if(window.innerWidth>768){
+    const links=document.querySelector('.nav-links');
+    if(links) links.style.cssText='';
+  }
+});
+
+/* ─── ANIMATE BARS ON DEMO VISIBLE ── */
+const demoSec = document.getElementById('demo');
+const demoObserver = new IntersectionObserver((entries)=>{
+  if(entries[0].isIntersecting){
+    document.querySelectorAll('.comp-fill').forEach(f=>{
+      f.style.width='0%';
+      setTimeout(()=>{ f.style.width=f.getAttribute('data-w')||f.style.width; },100);
+    });
+    demoObserver.disconnect();
+  }
+},{threshold:.3});
+if(demoSec) demoObserver.observe(demoSec);
+</script>
+</body>
+</html>
